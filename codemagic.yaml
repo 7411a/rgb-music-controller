@@ -1,0 +1,93 @@
+workflows:
+  rgb-controller-android:
+    name: RGB Controller Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        APP_NAME: "RGB Controller"
+        PACKAGE_NAME: "com.rgbcontroller.esp32.app"
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $FLUTTER_ROOT/.pub-cache
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/mobile-app/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          cd mobile-app
+          flutter packages pub get
+      - name: Flutter analyze
+        script: |
+          cd mobile-app
+          flutter analyze
+      - name: Build APK with Flutter
+        script: |
+          cd mobile-app
+          flutter build apk --release
+      - name: Build AAB with Flutter
+        script: |
+          cd mobile-app
+          flutter build appbundle --release
+    artifacts:
+      - mobile-app/build/**/outputs/**/*.apk
+      - mobile-app/build/**/outputs/**/*.aab
+      - mobile-app/build/**/outputs/**/mapping.txt
+      - mobile-app/flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - johnn@example.com # Replace with your email
+        notify:
+          success: true
+          failure: true
+
+  rgb-controller-ios:
+    name: RGB Controller iOS Build
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        APP_NAME: "RGB Controller"
+        BUNDLE_ID: "com.rgbcontroller.esp32.app"
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $FLUTTER_ROOT/.pub-cache
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          cd mobile-app
+          flutter packages pub get
+      - name: Install CocoaPods dependencies
+        script: |
+          cd mobile-app/ios
+          pod install
+      - name: Flutter analyze
+        script: |
+          cd mobile-app
+          flutter analyze
+      - name: Build iOS (no signing)
+        script: |
+          cd mobile-app
+          flutter build ios --release --no-codesign
+    artifacts:
+      - mobile-app/build/ios/iphoneos/*.app
+      - mobile-app/flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - johnn@example.com # Replace with your email
+        notify:
+          success: true
+          failure: true
