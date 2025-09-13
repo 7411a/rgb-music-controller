@@ -72,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // Pattern Steps Management
   List<PatternStep> _patternSteps = [];
   int _selectedStepIndex = 0;
-  bool _showPatternEditor = false;
 
   @override
   void initState() {
