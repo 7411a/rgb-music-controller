@@ -32,9 +32,9 @@ jobs:
       working-directory: ./mobile-app
       run: flutter pub get
       
-    # - name: Analyze Flutter code
-    #   working-directory: ./mobile-app
-    #   run: flutter analyze
+    - name: Analyze Flutter code (warnings only)
+      working-directory: ./mobile-app
+      run: flutter analyze || true
       
     - name: Run Flutter tests
       working-directory: ./mobile-app

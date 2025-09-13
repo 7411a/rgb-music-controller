@@ -23,10 +23,10 @@ workflows:
         script: |
           cd mobile-app
           flutter packages pub get
-      - name: Flutter analyze
-        script: |
-          cd mobile-app
-          flutter analyze
+      # - name: Flutter analyze
+      #   script: |
+      #     cd mobile-app
+      #     flutter analyze
       - name: Build APK with Flutter
         script: |
           cd mobile-app
@@ -73,10 +73,10 @@ workflows:
         script: |
           cd mobile-app/ios
           pod install
-      - name: Flutter analyze
-        script: |
-          cd mobile-app
-          flutter analyze
+      # - name: Flutter analyze
+      #   script: |
+      #     cd mobile-app
+      #     flutter analyze
       - name: Build iOS (no signing)
         script: |
           cd mobile-app

@@ -9,8 +9,6 @@ class SettingsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ESP32Service>(
       builder: (context, esp32Service, child) {
-        final config = esp32Service.config;
-        
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
