@@ -32,9 +32,9 @@ android {
 
     buildTypes {
         release {
-            // Optimize for release
-            isMinifyEnabled = true
-            isShrinkResources = true
+            // Temporarily disable minification to avoid R8 issues
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -60,4 +60,10 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Google Play Core library for Play Store compatibility
+    implementation("com.google.android.play:core:1.10.3")
+    implementation("com.google.android.play:core-ktx:1.8.1")
 }
