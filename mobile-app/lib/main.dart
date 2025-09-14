@@ -39,7 +39,7 @@ class RGBControllerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ตัวควบคุม RGB',
+      title: 'B2SRGB',
       theme: ThemeData(
         primarySwatch: Colors.purple,
         useMaterial3: true,
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ตัวควบคุม RGB'),
+        title: const Text('B2SRGB'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

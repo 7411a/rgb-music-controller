@@ -1,7 +1,7 @@
-name: rgb_controller_app
-description: "ESP32 RGB LED Strip Controller with Music Reactive Mode and 256 Custom Pattern Steps"
-homepage: https://github.com/your-username/rgb-controller-app
-repository: https://github.com/your-username/rgb-controller-app
+name: b2s_rgb_controller
+description: "B2SRGB - ESP32 RGB Music Controller with 256 Pattern Steps and Real-time Audio Reactive Lighting"
+homepage: https://github.com/7411a/rgb-music-controller
+repository: https://github.com/7411a/rgb-music-controller
 
 publish_to: 'none'
 
@@ -35,6 +35,26 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+  
+  # App Icon Configuration
+  assets:
+    - assets/icons/
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+  windows:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+  macos:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
