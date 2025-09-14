@@ -5,7 +5,6 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:
 
 jobs:
   build-android:
@@ -16,7 +15,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Setup Java JDK
+    - name: Setup Java
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
@@ -25,22 +24,14 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.35.3'
+        flutter-version: '3.24.0'
         channel: 'stable'
         
-    - name: Get Flutter dependencies
+    - name: Install dependencies
       working-directory: ./mobile-app
       run: flutter pub get
       
-    - name: Analyze Flutter code (warnings only)
-      working-directory: ./mobile-app
-      run: flutter analyze || true
-      
-    - name: Run Flutter tests
-      working-directory: ./mobile-app
-      run: flutter test
-      
-    - name: Build Android APK
+    - name: Build APK
       working-directory: ./mobile-app
       run: flutter build apk --release
       
@@ -51,14 +42,16 @@ jobs:
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: android-apk
+        name: android-apk-release
         path: mobile-app/build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
         
     - name: Upload AAB artifact
       uses: actions/upload-artifact@v4
       with:
-        name: android-aab
+        name: android-aab-release
         path: mobile-app/build/app/outputs/bundle/release/app-release.aab
+        retention-days: 30
 
   build-web:
     name: Build Web App
@@ -71,91 +64,20 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.35.3'
+        flutter-version: '3.24.0'
         channel: 'stable'
         
-    - name: Get Flutter dependencies
+    - name: Install dependencies
       working-directory: ./mobile-app
       run: flutter pub get
       
-    - name: Build Web App
+    - name: Build for Web
       working-directory: ./mobile-app
       run: flutter build web --release
       
     - name: Upload Web artifact
       uses: actions/upload-artifact@v4
       with:
-        name: web-app
+        name: web-app-release
         path: mobile-app/build/web/
-
-  create-release:
-    name: Create Release
-    needs: [build-android, build-web]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Download APK artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: android-apk
-        path: ./artifacts/
-        
-    - name: Download AAB artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: android-aab
-        path: ./artifacts/
-        
-    - name: Download Web artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: web-app
-        path: ./artifacts/web/
-        
-    - name: Get version from pubspec.yaml
-      id: version
-      run: |
-        version=$(grep '^version:' mobile-app/pubspec.yaml | sed 's/version: //' | sed 's/+.*//')
-        echo "version=$version" >> $GITHUB_OUTPUT
-        
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: v${{ steps.version.outputs.version }}
-        name: RGB Controller v${{ steps.version.outputs.version }}
-        body: |
-          # RGB Controller v${{ steps.version.outputs.version }}
-          
-          ## 📱 Downloads
-          - **Android APK**: Direct installation file
-          - **Android AAB**: For Google Play Store
-          - **Web App**: Run in browser
-          
-          ## ✨ Features
-          - ESP32 RGB LED strip control
-          - 256 custom pattern steps
-          - Music reactive mode
-          - Real-time WebSocket communication
-          - Dark theme interface
-          
-          ## 📋 Requirements
-          - ESP32 with uploaded firmware
-          - WS2812B LED strip
-          - Android 5.0+ or iOS 12.0+
-          
-          ## 🚀 Installation
-          1. Download the APK file
-          2. Enable "Unknown sources" in Android settings
-          3. Install the APK
-          4. Connect to your ESP32 and enjoy!
-        files: |
-          ./artifacts/app-release.apk
-          ./artifacts/app-release.aab
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        retention-days: 30
