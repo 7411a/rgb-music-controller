@@ -28,10 +28,6 @@ android {
         targetSdk = 34  // Latest Android API
         versionCode = 1
         versionName = "1.0.0"
-        
-        // App metadata
-        manifestPlaceholders["appName"] = "RGB Controller"
-        manifestPlaceholders["appDescription"] = "ESP32 RGB LED Strip Controller with Music Reactive Mode"
     }
 
     buildTypes {
