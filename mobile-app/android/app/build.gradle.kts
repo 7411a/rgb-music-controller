@@ -24,7 +24,7 @@ android {
         applicationId = "com.rgbcontroller.esp32.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 21  // Minimum for modern Android features
+        minSdk = flutter.minSdkVersion  // Minimum for modern Android features
         targetSdk = 34  // Latest Android API
         versionCode = 1
         versionName = "1.0.0"

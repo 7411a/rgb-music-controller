@@ -39,7 +39,7 @@ class RGBControllerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ຕົວຄວບຄຸມ RGB',
+      title: 'ตัวควบคุม RGB',
       theme: ThemeData(
         primarySwatch: Colors.purple,
         useMaterial3: true,
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ຕົວຄວບຄຸມ RGB'),
+        title: const Text('ตัวควบคุม RGB'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -156,12 +156,12 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Icon(Icons.wifi_off, color: Colors.red),
                 SizedBox(width: 8),
-                Text('ບໍ່ໄດ້ເຊື່ອມຕໍ່ກັບ ESP32', 
+                Text('ไม่ได้เชื่อมต่อกับ ESP32', 
                      style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 8),
-            const Text('ໃສ່ທີ່ຢູ່ IP ຂອງ ESP32 ເພື່ອເຊື່ອມຕໍ່:'),
+            const Text('ใส่ที่อยู่ IP ของ ESP32 เพื่อเชื่อมต่อ:'),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -179,10 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     // TODO: Implement connection
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('ຄຸນສົມບັດການເຊື່ອມຕໍ່ກຳລັງມາ!')),
+                      const SnackBar(content: Text('คุณสมบัติการเชื่อมต่อกำลังมา!')),
                     );
                   },
-                  child: const Text('ເຊື່ອມຕໍ່'),
+                  child: const Text('เชื่อมต่อ'),
                 ),
               ],
             ),
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ຕົວຢ່າງສີ', 
+            const Text('ตัวอย่างสี', 
                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Container(
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Center(
                 child: Text(
-                  'RGB(${_selectedColor.red}, ${_selectedColor.green}, ${_selectedColor.blue})\nຄວາມສະຫວ່າງ: ${_brightness.round()}',
+                  'RGB(${_selectedColor.red}, ${_selectedColor.green}, ${_selectedColor.blue})\nความสว่าง: ${_brightness.round()}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: _selectedColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
@@ -234,31 +234,31 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ການຄວບຄຸມສີ', 
+            const Text('การควบคุมสี', 
                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             
             // Quick Colors
-            const Text('ສີດ່ວນ:'),
+            const Text('สีด่วน:'),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: [
-                _buildColorButton(Colors.red, 'ແດງ'),
-                _buildColorButton(Colors.green, 'ເຂືອ'),
-                _buildColorButton(Colors.blue, 'ຟ້າ'),
-                _buildColorButton(Colors.purple, 'ມ່ວງ'),
-                _buildColorButton(Colors.orange, 'ສົ້ມ'),
-                _buildColorButton(Colors.cyan, 'ຟ້າອ່ອນ'),
-                _buildColorButton(Colors.pink, 'ບົວ'),
-                _buildColorButton(Colors.white, 'ຂາວ'),
+                _buildColorButton(Colors.red, 'แดง'),
+                _buildColorButton(Colors.green, 'เขียว'),
+                _buildColorButton(Colors.blue, 'ฟ้า'),
+                _buildColorButton(Colors.purple, 'ม่วง'),
+                _buildColorButton(Colors.orange, 'ส้ม'),
+                _buildColorButton(Colors.cyan, 'ฟ้าอ่อน'),
+                _buildColorButton(Colors.pink, 'ชมพู'),
+                _buildColorButton(Colors.white, 'ขาว'),
               ],
             ),
             
             const SizedBox(height: 16),
             
             // Brightness Control
-            const Text('ຄວາມສະຫວ່າງ:'),
+            const Text('ความสว่าง:'),
             Slider(
               value: _brightness,
               min: 0,
@@ -313,43 +313,43 @@ class _HomeScreenState extends State<HomeScreen> {
     final modes = [
       {
         'key': 'solid',
-        'title': 'ສີພື້ນຖານ',
-        'description': 'ສີດຽວທົ່ວທຸກ LED',
+        'title': 'สีพื้นฐาน',
+        'description': 'สีเดียวทั่วทุก LED',
         'icon': Icons.circle,
         'color': Colors.blue,
       },
       {
         'key': 'rainbow',
-        'title': 'ສຽງຟ້າຮ້ອງ',
-        'description': 'ລາຍການສີເຄື່ອນໄຫວ',
+        'title': 'สีรุ้ง',
+        'description': 'รายการสีเคลื่อนไหว',
         'icon': Icons.color_lens,
         'color': Colors.purple,
       },
       {
         'key': 'music',
-        'title': 'ຕອບສະໜອງດົນຕີ',
-        'description': 'LED ຕອບສະໜອງກັບສຽງ',
+        'title': 'ตอบสนองดนตรี',
+        'description': 'LED ตอบสนองกับเสียง',
         'icon': Icons.music_note,
         'color': Colors.green,
       },
       {
         'key': 'pattern',
-        'title': 'ແບບຮູບແບບກຳນົດເອງ',
-        'description': '256 ຂັ້ນຕອນປັບໄດ້',
+        'title': 'แบบรูปแบบกำหนดเอง',
+        'description': '256 ขั้นตอนปรับได้',
         'icon': Icons.gradient,
         'color': Colors.orange,
       },
       {
         'key': 'strobe',
-        'title': 'ແສງກະພິບ',
-        'description': 'ຜົນກະທົບກະພິບໄວ',
+        'title': 'แสงกะพริบ',
+        'description': 'ผลกระทบกะพริบไว',
         'icon': Icons.flash_on,
         'color': Colors.red,
       },
       {
         'key': 'fade',
-        'title': 'ເປີ່ຍນສີນຸ່ມນວນ',
-        'description': 'ການປ່ຽນສີແບບລື່ນ',
+        'title': 'เปลี่ยนสีนุ่มนวล',
+        'description': 'การเปลี่ยนสีแบบลื่น',
         'icon': Icons.gradient,
         'color': Colors.cyan,
       },
@@ -365,10 +365,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Icon(Icons.display_settings, color: Colors.purple),
                 const SizedBox(width: 8),
-                const Text('ໂໝດການສະແດງຜົນ', 
+                const Text('โหมดการแสดงผล', 
                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const Spacer(),
-                Text('ປັດຈຸບັນ: ${_getModeDisplayName(_currentMode)}',
+                Text('ปัจจุบัน: ${_getModeDisplayName(_currentMode)}',
                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
@@ -396,7 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('ເລືອກແລ້ວ: ${mode['title']}'),
+              content: Text('เลือกแล้ว: ${mode['title']}'),
               duration: const Duration(seconds: 1),
               backgroundColor: mode['color'] as Color,
             ),
@@ -492,7 +492,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Icon(Icons.tune, color: Colors.purple),
                 const SizedBox(width: 8),
-                Text('${_getModeDisplayName(_currentMode)} Settings',
+                Text('${_getModeDisplayName(_currentMode)} การตั้งค่า',
                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               ],
             ),
@@ -512,9 +512,9 @@ class _HomeScreenState extends State<HomeScreen> {
         return const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('• ໃຊ້ສີທີ່ເລືອກໄວ້ຂ້າງເທິງ'),
-            Text('• ສາມາດປັບຄວາມສະຫວ່າງໄດ້'),
-            Text('• ເໝາະສຳລັບແສງແວດລ້ອມ'),
+            Text('• ใช้สีที่เลือกไว้ข้างเทิง'),
+            Text('• สามารถปรับความสว่างได้'),
+            Text('• เหมาะสำหรับแสงแวดล้อม'),
           ],
         );
         
@@ -522,7 +522,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ຄວາມໄວໃນການເຄື່ອນໄຫວ:'),
+            const Text('ความเร็วในการเคลื่อนไหว:'),
             Slider(
               value: 50.0,
               min: 1,
@@ -533,8 +533,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 // TODO: Implement speed control
               },
             ),
-            const Text('• ໝູນວຽນຜ່ານທຸກສີ'),
-            const Text('• ສາມາດປັບຄວາມໄວໄດ້'),
+            const Text('• หมุนวียนผ่านทุกสี'),
+            const Text('• สามารถปรับความไวได้'),
           ],
         );
         
@@ -542,7 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ຄວາມອ່ອນໄຫວ:'),
+            const Text('ความอ่อนไหว:'),
             Slider(
               value: 75.0,
               min: 0,
@@ -553,9 +553,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 // TODO: Implement sensitivity control
               },
             ),
-            const Text('• ຕ້ອງການການເຊື່ອມຕໍ່ໄມໂຄຣໂຟນ'),
-            const Text('• ຕອບສະໜອງກັບການປ້ອນສຽງ'),
-            const Text('• ປັບຄວາມອ່ອນໄຫວສຳລັບສະພາບແວດລ້ອມທີ່ແຕກຕ່າງກັນ'),
+            const Text('• ต้องการการเชื่อมต่อไมโครโฟน'),
+            const Text('• ตอบสนองกับการป้อนเสียง'),
+            const Text('• ปรับความอ่อนไหวสำหรับสภาพแวดล้อมที่แตกต่างกัน'),
           ],
         );
         
@@ -569,11 +569,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('ຕົວແກ້ໄຂແບບຮູບແບບກຳລັງມາ!')),
+                        const SnackBar(content: Text('ตัวแก้ไขแบบรูปแบบกำลังมา!')),
                       );
                     },
                     icon: const Icon(Icons.edit),
-                    label: const Text('ແກ້ໄຂແບບຮູບແບບ'),
+                    label: const Text('แก้ไขแบบรูปแบบ'),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -581,19 +581,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('ແບບຮູບແບບທີ່ກຳນົດໄວ້ລ່ວງໜ້າກຳລັງມາ!')),
+                        const SnackBar(content: Text('แบบรูปแบบที่กำหนดไว้ล่วงหน้ากำลังมา!')),
                       );
                     },
                     icon: const Icon(Icons.library_books),
-                    label: const Text('ຕົວຢ່າງ'),
+                    label: const Text('ตัวอย่าง'),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            const Text('• 256 ຂັ້ນຕອນແຕ່ລະຂັ້ນ'),
-            const Text('• ສີກຳນົດເອງສຳລັບແຕ່ລະ LED'),
-            const Text('• ບັນທຶກ ແລະ ໂຫຼດແບບຮູບແບບ'),
+            const Text('• 256 ขั้นตอนแต่ละขั้น'),
+            const Text('• สีกำหนดเองสำหรับแต่ละ LED'),
+            const Text('• บันทึก และ โหลดแบบรูปแบบ'),
           ],
         );
         
@@ -601,7 +601,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ອັດຕາການກະພິບ:'),
+            const Text('อัตราการกะพริบ:'),
             Slider(
               value: 10.0,
               min: 1,
@@ -612,8 +612,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 // TODO: Implement flash rate control
               },
             ),
-            const Text('• ຜົນກະທົບການກະພິບໄວ'),
-            const Text('• ສາມາດປັບອັດຕາການກະພິບໄດ້'),
+            const Text('• ผลกระทบการกะพริบเร็ว'),
+            const Text('• สามารถปรับอัตราการกะพริบได้'),
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -626,7 +626,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'ເຕືອນ: ອາດຈະກໍ່ໃຫ້ເກີດພະຍາດລົມບ້າໝູເນື່ອງຈາກແສງ',
+                      'เตือน: อาจก่อให้เกิดพยาธิลมบ้าหมูเนื่องจากแสง',
                       style: TextStyle(color: Colors.orange, fontSize: 12),
                     ),
                   ),
@@ -640,7 +640,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ຄວາມໄວການຈືນ:'),
+            const Text('ความเร็วการจืด:'),
             Slider(
               value: 30.0,
               min: 1,
@@ -651,14 +651,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 // TODO: Implement fade speed control
               },
             ),
-            const Text('• ການປ່ຽນສີແບບລື່ນ'),
-            const Text('• ໝູນວຽນລະຫວ່າງສີທີ່ເລືອກ'),
-            const Text('• ສາມາດປັບຄວາມໄວການປ່ຽນໄດ້'),
+            const Text('• การเปลี่ยนสีแบบลื่น'),
+            const Text('• หมุนวียนระหว่างสีที่เลือก'),
+            const Text('• สามารถปรับความไวการเปลี่ยนได้'),
           ],
         );
         
       default:
-        return const Text('ເລືອກໂໝດເພື່ອເບິ່ງການຕັ້ງຄ່າ');
+        return const Text('เลือกโหมดเพื่อเบิ่งการตั้งค่า');
     }
   }
 
@@ -673,10 +673,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Icon(Icons.palette, color: Colors.orange),
                 const SizedBox(width: 8),
-                const Text('ຕົວແກ້ໄຂແບບຮູບແບບ', 
+                const Text('ตัวแก้ไขแบบรูปแบบ', 
                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const Spacer(),
-                Text('${_patternSteps.length} ຂັ້ນຕອນ',
+                Text('${_patternSteps.length} ขั้นตอน',
                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
@@ -706,9 +706,9 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Row(
           children: [
-            const Text('ຂັ້ນຕອນແບບຮູບແບບ:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('ขั้นตอนแบบรูปแบบ:', style: TextStyle(fontWeight: FontWeight.bold)),
             const Spacer(),
-            Text('ເລືອກແລ້ວ: ${_selectedStepIndex + 1}',
+            Text('เลือกแล้ว: ${_selectedStepIndex + 1}',
                  style: const TextStyle(color: Colors.grey)),
           ],
         ),
@@ -776,14 +776,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('ແກ້ໄຂຂັ້ນຕອນ ${_selectedStepIndex + 1}', 
+        Text('แก้ไขขั้นตอน ${_selectedStepIndex + 1}', 
              style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         
         // Color picker for selected step
         Row(
           children: [
-            const Text('ສີ:'),
+            const Text('สี:'),
             const SizedBox(width: 12),
             GestureDetector(
               onTap: () => _showColorPickerForStep(_selectedStepIndex),
@@ -810,7 +810,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 12),
         
         // Duration slider
-        Text('ໄລຍະເວລາ: ${selectedStep.duration}ms'),
+        Text('ระยะเวลา: ${selectedStep.duration}ms'),
         Slider(
           value: selectedStep.duration.toDouble(),
           min: 50,
@@ -829,7 +829,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 12),
         
         // Brightness slider
-        Text('ຄວາມສະຫວ່າງ: ${(selectedStep.brightness * 100).round()}%'),
+        Text('ความสว่าง: ${(selectedStep.brightness * 100).round()}%'),
         Slider(
           value: selectedStep.brightness,
           min: 0.0,
@@ -852,7 +852,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('ການຄວບຄຸມແບບຮູບແບບ:', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text('การควบคุมแบบรูปแบบ:', style: TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         
         Wrap(
@@ -862,7 +862,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton.icon(
               onPressed: _generateRainbowPattern,
               icon: const Icon(Icons.gradient, size: 16),
-              label: const Text('ສີຟ້າຮ້ອງ'),
+              label: const Text('สีฟ้าร้อง'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple.withOpacity(0.3),
               ),
@@ -870,7 +870,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton.icon(
               onPressed: _generateRandomPattern,
               icon: const Icon(Icons.shuffle, size: 16),
-              label: const Text('ສຸ່ມ'),
+              label: const Text('สุ่ม'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.withOpacity(0.3),
               ),
@@ -878,7 +878,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton.icon(
               onPressed: _clearPattern,
               icon: const Icon(Icons.clear, size: 16),
-              label: const Text('ລ້າງ'),
+              label: const Text('ล้าง'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red.withOpacity(0.3),
               ),
@@ -886,7 +886,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton.icon(
               onPressed: _sendPatternToESP32,
               icon: const Icon(Icons.send, size: 16),
-              label: const Text('ສົ່ງໄປ ESP32'),
+              label: const Text('ส่งไป ESP32'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.withOpacity(0.3),
               ),
@@ -917,7 +917,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('ສ້າງແບບຮູບແບບສີຟ້າຮ້ອງແລ້ວ!')),
+      const SnackBar(content: Text('สร้างแบบรูปแบบสีฟ้าร้องแล้ว!')),
     );
   }
 
@@ -938,7 +938,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('ສ້າງແບບຮູບແບບສຸ່ມແລ້ວ!')),
+      const SnackBar(content: Text('สร้างแบบรูปแบบสุ่มแล้ว!')),
     );
   }
 
@@ -954,14 +954,14 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('ລ້າງແບບຮູບແບບແລ້ວ!')),
+      const SnackBar(content: Text('ล้างแบบรูปแบบแล้ว!')),
     );
   }
 
   void _showColorPickerForStep(int stepIndex) {
     // TODO: Implement color picker dialog
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('ຕົວເລືອກສີສຳລັບຂັ້ນຕອນ ${stepIndex + 1} - ກຳລັງມາ!')),
+      SnackBar(content: Text('ตัวเลือกสีสำหรับขั้นตอน ${stepIndex + 1} - กำลังมา!')),
     );
   }
 
@@ -969,7 +969,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: Implement WebSocket communication
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('ສົ່ງແບບຮູບແບບໄປ ESP32 ແລ້ວ! (ການເຊື່ອມຕໍ່ WebSocket ກຳລັງມາ)'),
+        content: Text('ส่งแบบรูปแบบไป ESP32 แล้ว! (การเชื่อมต่อ WebSocket กำลังมา)'),
         backgroundColor: Colors.green,
       ),
     );
@@ -977,13 +977,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _getModeDisplayName(String mode) {
     switch (mode) {
-      case 'solid': return 'ສີພື້ນຖານ';
-      case 'rainbow': return 'ສິຟ້າຮ້ອງ';
-      case 'music': return 'ຕອບສະໜອງດົນຕີ';
-      case 'pattern': return 'ແບບຮູບແບບກຳນົດເອງ';
-      case 'strobe': return 'ແສງກະພິບ';
-      case 'fade': return 'ເປີ່ຍນສີນຸ່ມນວນ';
-      default: return 'ບໍ່ຮູ້ຈັກ';
+      case 'solid': return 'สีพื้นฐาน';
+      case 'rainbow': return 'สีรุ้ง';
+      case 'music': return 'ตอบสนองดนตรี';
+      case 'pattern': return 'แบบรูปแบบกำหนดเอง';
+      case 'strobe': return 'แสงกะพริบ';
+      case 'fade': return 'เปลี่ยนสีนุ่มนวล';
+      default: return 'ไม่รู้จัก';
     }
   }
 
@@ -998,21 +998,21 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Icon(Icons.info_outline, color: Colors.blue),
                 SizedBox(width: 8),
-                Text('ເລີ່ມຕົ້ນໃຊ້ງານ', 
+                Text('เริ่มต้นใช้งาน', 
                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 12),
-            const Text('1. ອັບໂຫລດເຟີມແວໄປທີ່ ESP32 ຂອງທ່ານ'),
-            const Text('2. ເຊື່ອມຕໍ່ ESP32 ກັບ WiFi ໂດຍໃຊ້ "ESP32-RGB-Controller" AP'),
-            const Text('3. ໃສ່ທີ່ຢູ່ IP ຂອງ ESP32 ຂ້າງເທິງ ແລະ ເຊື່ອມຕໍ່'),
-            const Text('4. ເລີ່ມຄວບຄຸມ RGB LED ຂອງທ່ານ!'),
+            const Text('1. อัปโหลดเฟิร์มแวร์ไปที่ ESP32 ของท่าน'),
+            const Text('2. เชื่อมต่อ ESP32 กับ WiFi โดยใช้ "ESP32-RGB-Controller" AP'),
+            const Text('3. ใส่ที่อยู่ IP ของ ESP32 ข้างเทิง และ เชื่อมต่อ'),
+            const Text('4. เริ่มควบคุม RGB LED ของท่าน!'),
             const SizedBox(height: 12),
-            const Text('ຄຸນສົມບັດ:', style: TextStyle(fontWeight: FontWeight.bold)),
-            const Text('• 256 ຂັ້ນຕອນແບບຮູບແບບທີ່ປັບໄດ້'),
-            const Text('• ໂໝດຕອບສະໜອງດົນຕີ'),
-            const Text('• ການຄວບຄຸມສີແບບທັນທີ'),
-            const Text('• ໂໝດການສະແດງຜົນຫຼາຍແບບ'),
+            const Text('คุณสมบัติ:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('• 256 ขั้นตอนแบบรูปแบบที่ปรับได้'),
+            const Text('• โหมดตอบสนองดนตรี'),
+            const Text('• การควบคุมสีแบบทันที'),
+            const Text('• โหมดการแสดงผลหลายแบบ'),
           ],
         ),
       ),
